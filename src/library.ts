@@ -74,7 +74,7 @@ class ViewLibrary {
         public status: () => BookStatus
     ) {        
         this.library.suscribe(book=>this.paintNew(book));
-        this.tbody = table.querySelector('tbody');
+        this.tbody = <HTMLElement>table.querySelector('tbody');
     }
 
     setAddButton(button: HTMLElement) {
@@ -103,10 +103,10 @@ class ViewLibrary {
         let tr = document.createElement('tr');
         tr.id = book.id;
         let td = document.createElement('td');
-        td.innerHTML = book.author;
+        td.innerHTML = book.title;
         tr.appendChild(td);
         td = document.createElement('td');
-        td.innerHTML = book.title; 
+        td.innerHTML = book.author; 
         tr.appendChild(td);
         td = document.createElement('td');
         td.innerHTML = book.year.toString();
