@@ -94,35 +94,42 @@ var ViewLibrary = (function () {
     ViewLibrary.prototype.createTr = function (book) {
         var tr = document.createElement('tr');
         tr.id = book.id;
+        tr.appendChild(this.createTd(book.title));
+        tr.appendChild(this.createTd(book.author));
+        tr.appendChild(this.createTd(book.status.translate));
+        tr.appendChild(this.createTdStatus(book.year.toString()));
+        tr.appendChild(this.createTdRemove());
+        return tr;
+    };
+    ViewLibrary.prototype.createTdStatus = function (status) {
+        var td = this.createTd(status);
+        td.innerHTML = this.createIcon('glyphicon-refresh').outerHTML + td.innerHTML;
+        return td;
+    };
+    ViewLibrary.prototype.createTdRemove = function () {
+        var td = this.createTd('');
+        var button = this.createButton('btn-danger');
+        button.appendChild(this.createIcon('glyphicon-remove-circle'));
+        td.appendChild(button);
+        return td;
+    };
+    ViewLibrary.prototype.createTd = function (text) {
         var td = document.createElement('td');
-        td.innerHTML = book.title;
-        tr.appendChild(td);
-        td = document.createElement('td');
-        td.innerHTML = book.author;
-        tr.appendChild(td);
-        td = document.createElement('td');
-        td.innerHTML = book.year.toString();
-        tr.appendChild(td);
-        td = document.createElement('td');
+        td.innerHTML = text;
+        return td;
+    };
+    ViewLibrary.prototype.createIcon = function (iconSet) {
         var icon = document.createElement('span');
         icon.classList.add('glyphicon');
-        icon.classList.add('glyphicon-refresh');
+        icon.classList.add(iconSet);
         icon.setAttribute('aria-hidden', 'true');
-        td.appendChild(icon);
-        td.innerHTML = td.innerHTML + ' ' + book.status.translate;
-        tr.appendChild(td);
-        td = document.createElement('td');
+        return icon;
+    };
+    ViewLibrary.prototype.createButton = function (buttonSet) {
         var button = document.createElement('button');
         button.classList.add('btn');
         button.classList.add('btn-danger');
-        icon = document.createElement('span');
-        icon.classList.add('glyphicon');
-        icon.classList.add('glyphicon-remove-circle');
-        icon.setAttribute('aria-hidden', 'true');
-        button.appendChild(icon);
-        td.appendChild(button);
-        tr.appendChild(td);
-        return tr;
+        return button;
     };
     return ViewLibrary;
 }());

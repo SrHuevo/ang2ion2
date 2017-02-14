@@ -102,35 +102,47 @@ class ViewLibrary {
     private createTr(book: Book) : HTMLElement {
         let tr = document.createElement('tr');
         tr.id = book.id;
+        tr.appendChild(this.createTd(book.title));
+        tr.appendChild(this.createTd(book.author));
+        tr.appendChild(this.createTd(book.status.translate));
+        tr.appendChild(this.createTdStatus(book.year.toString()));
+        tr.appendChild(this.createTdRemove());
+        return tr
+    }
+
+    private createTdStatus(status: string) : HTMLElement {
+        let td = this.createTd(status);
+        td.innerHTML = this.createIcon('glyphicon-refresh').outerHTML + td.innerHTML;
+        return td;
+    }
+
+    private createTdRemove() : HTMLElement {
+        let td = this.createTd('');
+        let button = this.createButton('btn-danger');
+        button.appendChild(this.createIcon('glyphicon-remove-circle'))
+        td.appendChild(button);
+        return td;
+    }
+
+    private createTd(text: string) : HTMLElement {
         let td = document.createElement('td');
-        td.innerHTML = book.title;
-        tr.appendChild(td);
-        td = document.createElement('td');
-        td.innerHTML = book.author; 
-        tr.appendChild(td);
-        td = document.createElement('td');
-        td.innerHTML = book.year.toString();
-        tr.appendChild(td);
-        td = document.createElement('td');
+        td.innerHTML = text;
+        return td;
+    }
+
+    private createIcon(iconSet: string) : HTMLElement {
         let icon = document.createElement('span');
         icon.classList.add('glyphicon');
-        icon.classList.add('glyphicon-refresh');
+        icon.classList.add(iconSet);
         icon.setAttribute('aria-hidden', 'true');
-        td.appendChild(icon);
-        td.innerHTML = td.innerHTML + ' ' + book.status.translate;
-        tr.appendChild(td);
-        td = document.createElement('td');
+        return icon;
+    }
+
+    private createButton(buttonSet: string) : HTMLElement {
         let button = document.createElement('button');
         button.classList.add('btn');
         button.classList.add('btn-danger');
-        icon = document.createElement('span');
-        icon.classList.add('glyphicon');
-        icon.classList.add('glyphicon-remove-circle');
-        icon.setAttribute('aria-hidden', 'true');
-        button.appendChild(icon);
-        td.appendChild(button);
-        tr.appendChild(td);
-        return tr
+        return button;
     }
 }
 
