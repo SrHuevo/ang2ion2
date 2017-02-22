@@ -1,0 +1,24 @@
+{
+  "name": "ang2ion2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SrHuevo/ang2ion2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SrHuevo/ang2ion2/issues"
+  },
+  "homepage": "https://github.com/SrHuevo/ang2ion2#readme",
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.0.4",
+    "typescript": "^2.1.6"
+  }
+}
